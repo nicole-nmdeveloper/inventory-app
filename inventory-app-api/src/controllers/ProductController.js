@@ -4,6 +4,9 @@ import Product from '../models/Product'
 class ProductController {
   async index(req, res) {
     const products = await Product.findAll({
+      where: {
+        user_id: req.userId,
+      },
       attributes: ['id', 'title', 'price', 'amount', 'variants', 'user_id'],
       order: [['id', 'DESC']],
     })
@@ -41,7 +44,11 @@ class ProductController {
         })
       }
 
-      const product = await Product.findByPk(id, {
+      const product = await Product.findOne({
+        where: {
+          id,
+          user_id: req.userId,
+        },
         attributes: ['id', 'title', 'price', 'amount', 'variants'],
         order: [['id', 'DESC']],
       })
@@ -70,7 +77,12 @@ class ProductController {
         })
       }
 
-      const product = await Product.findByPk(id)
+      const product = await Product.findOne({
+        where: {
+          id,
+          user_id: req.userId,
+        },
+      })
 
       if (!product) {
         return res.status(400).json({
@@ -98,7 +110,12 @@ class ProductController {
         })
       }
 
-      const product = await Product.findByPk(id)
+      const product = await Product.findOne({
+        where: {
+          id,
+          user_id: req.userId,
+        },
+      })
 
       if (!product) {
         return res.status(400).json({
