@@ -53,5 +53,6 @@ export default class Product extends Model {
 
   static associate(models) {
     this.belongsTo(models.User, { foreignKey: 'user_id' })
+    this.hasMany(models.Picture, { foreignKey: 'product_id' })
   }
 }

@@ -3,8 +3,9 @@ import Sequelize from 'sequelize'
 import databaseConfig from '../config/database'
 import User from '../models/User'
 import Product from '../models/Product'
+import Picture from '../models/Picture'
 
-const models = [User, Product]
+const models = [User, Product, Picture]
 
 const connection = new Sequelize(databaseConfig)
 

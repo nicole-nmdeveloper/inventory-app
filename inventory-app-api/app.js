@@ -7,6 +7,7 @@ import homeRoutes from './src/routes/homeRoutes'
 import userRoutes from './src/routes/userRoutes'
 import tokenRoutes from './src/routes/tokenRoutes'
 import productRoutes from './src/routes/productRoutes'
+import pictureRoutes from './src/routes/pictureRoutes'
 
 dotenv.config()
 
@@ -28,6 +29,7 @@ class App {
     this.app.use('/users/', userRoutes)
     this.app.use('/tokens/', tokenRoutes)
     this.app.use('/products/', productRoutes)
+    this.app.use('/pictures/', pictureRoutes)
   }
 }
 

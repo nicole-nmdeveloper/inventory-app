@@ -1,5 +1,6 @@
 /* eslint-disable camelcase */
 import Product from '../models/Product'
+import Picture from '../models/Picture'
 
 class ProductController {
   async index(req, res) {
@@ -8,7 +9,14 @@ class ProductController {
         user_id: req.userId,
       },
       attributes: ['id', 'title', 'price', 'amount', 'variants', 'user_id'],
-      order: [['id', 'DESC']],
+      order: [
+        ['id', 'DESC'],
+        [Picture, 'id', 'DESC'],
+      ],
+      include: {
+        model: Picture,
+        attributes: ['url', 'originalname', 'filename'],
+      },
     })
 
     return res.json(products)
@@ -50,7 +58,14 @@ class ProductController {
           user_id: req.userId,
         },
         attributes: ['id', 'title', 'price', 'amount', 'variants'],
-        order: [['id', 'DESC']],
+        order: [
+          ['id', 'DESC'],
+          [Picture, 'id', 'DESC'],
+        ],
+        include: {
+          model: Picture,
+          attributes: ['url', 'originalname', 'filename'],
+        },
       })
 
       if (!product) {
