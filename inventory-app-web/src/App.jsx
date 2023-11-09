@@ -1,7 +1,20 @@
 import React from 'react'
+import { BrowserRouter } from 'react-router-dom'
+
+import Routes from './routes'
+
+import Header from './components/Header'
+
+import GlobalStyle from './styles/GlobalStyles'
 
 function App() {
-  return <h1>Inventory App</h1>
+  return (
+    <BrowserRouter>
+      <Header />
+      <Routes />
+      <GlobalStyle />
+    </BrowserRouter>
+  )
 }
 
 export default App
