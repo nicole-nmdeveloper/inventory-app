@@ -13,7 +13,7 @@ import pictureRoutes from './src/routes/pictureRoutes'
 
 dotenv.config()
 
-const whiteList = ['http://localhost:3000']
+const whiteList = ['http://localhost:5173']
 
 const corsOptions = {
   origin: function (origin, callback) {

@@ -4,7 +4,7 @@ import * as colors from '../../config/colors'
 export const Nav = styled.nav`
   background: ${colors.darkColor};
 
-  padding: 20px;
+  padding: 30px;
 
   display: flex;
   align-items: center;
