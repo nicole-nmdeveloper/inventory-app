@@ -3,6 +3,7 @@ import * as colors from '../../config/colors'
 
 export const Nav = styled.nav`
   background: ${colors.darkColor};
+  color: ${colors.lightColor};
 
   padding: 30px;
 
