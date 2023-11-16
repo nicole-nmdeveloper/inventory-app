@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Container } from './styled'
+import { Container } from '../../styles/GlobalStyles'
 
 export default function Page404() {
   return (

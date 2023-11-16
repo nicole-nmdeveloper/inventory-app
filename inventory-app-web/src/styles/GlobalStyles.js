@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components'
+import styled, { createGlobalStyle } from 'styled-components'
 
 import * as colors from '../config/colors'
 
@@ -57,4 +57,12 @@ export default createGlobalStyle`
   ul {
     list-style: none;
   }
+`
+
+export const Container = styled.main`
+  text-align: center;
+
+  background: ${colors.primaryLighterColor};
+
+  padding: 30px;
 `
