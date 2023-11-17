@@ -20,7 +20,7 @@ function App() {
           <Header />
           <Routes />
           <GlobalStyle />
-          <Toaster toastOptions={{ duration: 3000 }} />
+          <Toaster toastOptions={{ duration: 5000 }} reverseOrder={true} />
         </Router>
       </PersistGate>
     </Provider>

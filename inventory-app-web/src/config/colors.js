@@ -4,4 +4,4 @@ export const primaryLightColor = '#9bb1ff'
 export const primaryLighterColor = '#bfd7ff'
 
 export const darkColor = '#1a1a1d'
-export const lightColor = '#f2f2f2'
+export const lightColor = '#fff'

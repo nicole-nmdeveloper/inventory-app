@@ -31,27 +31,27 @@ export default createGlobalStyle`
     border-radius: 5px;
 
     padding: 10px 20px;
-  }
 
-  button:hover {
-    background: ${colors.primaryColor};
-  }
+    &:hover {
+      background: ${colors.primaryColor};
+    }
 
-  button:active {
-    background: ${colors.primaryLightColor};
+    &:active {
+      background: ${colors.primaryLightColor};
+    }
   }
 
   a {
     text-decoration: none;
     color: ${colors.lightColor};
-  }
 
-  a:hover {
-    color: ${colors.primaryLightColor};
-  }
+    &:hover {
+      color: ${colors.primaryLightColor};
+    }
 
-  a:active {
-    color: ${colors.primaryLighterColor};
+    &:active {
+      color: ${colors.primaryLighterColor};
+    }
   }
 
   ul {
