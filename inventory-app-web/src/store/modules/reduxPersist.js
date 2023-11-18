@@ -6,7 +6,7 @@ export default (reducers) => {
     {
       key: 'INVENTORY-APP',
       storage,
-      whitelist: ['example'],
+      whitelist: ['auth'],
     },
     reducers,
   )
