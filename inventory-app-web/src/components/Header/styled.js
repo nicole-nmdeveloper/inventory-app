@@ -14,10 +14,20 @@ export const Nav = styled.nav`
   a {
     font-weight: 500;
 
+    color: ${colors.lightColor};
+
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 5px;
+
+    &:hover {
+      color: ${colors.primaryLightColor};
+    }
+
+    &:active {
+      color: ${colors.primaryLighterColor};
+    }
   }
 `
 

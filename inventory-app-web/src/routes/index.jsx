@@ -3,6 +3,7 @@ import { Switch } from 'react-router-dom'
 
 import MyRoute from './MyRoute'
 
+import Edit from '../pages/Edit'
 import Login from '../pages/Login'
 import Page404 from '../pages/Page404'
 import Pictures from '../pages/Pictures'
@@ -15,6 +16,7 @@ export default function Routes() {
     <Switch>
       <MyRoute exact path="/login/" component={Login} isClosed={false} />
       <MyRoute exact path="/register/" component={Register} isClosed={false} />
+      <MyRoute exact path="/edit/" component={Edit} isClosed />
       <MyRoute exact path="/products/" component={Products} isClosed />
       <MyRoute exact path="/product/" component={Product} isClosed />
       <MyRoute exact path="/product/:id/edit" component={Product} isClosed />

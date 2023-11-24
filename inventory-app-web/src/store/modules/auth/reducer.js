@@ -31,6 +31,28 @@ export default function (state = initialState, action) {
       return newState
     }
 
+    case types.EDIT_REQUEST: {
+      const newState = { ...state }
+      newState.isLoading = true
+      return newState
+    }
+
+    case types.EDIT_SUCCESS: {
+      const newState = { ...state }
+
+      newState.user.name = action.payload.name
+      newState.user.email = action.payload.email
+      newState.isLoading = false
+
+      return newState
+    }
+
+    case types.EDIT_FAILURE: {
+      const newState = { ...state }
+      newState.isLoading = false
+      return newState
+    }
+
     default: {
       return state
     }

@@ -43,15 +43,6 @@ export default createGlobalStyle`
 
   a {
     text-decoration: none;
-    color: ${colors.lightColor};
-
-    &:hover {
-      color: ${colors.primaryLightColor};
-    }
-
-    &:active {
-      color: ${colors.primaryLighterColor};
-    }
   }
 
   ul {

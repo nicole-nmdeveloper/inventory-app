@@ -18,11 +18,11 @@ function* loginRequest({ payload }) {
 
     axios.defaults.headers.Authorization = `Bearer ${response.data.token}`
 
-    history.push(payload.prevPath)
+    return history.push(payload.prevPath)
   } catch (err) {
     toast.error('Usuário ou senha inválidos.')
 
-    yield put(actions.loginFailure())
+    return yield put(actions.loginFailure())
   }
 }
 
@@ -33,7 +33,42 @@ function persistRehydrate({ payload }) {
   axios.defaults.headers.Authorization = `Bearer ${token}`
 }
 
+function* editRequest({ payload }) {
+  const { id, name, email } = payload
+
+  try {
+    if (!id) return
+
+    yield call(axios.put, '/users/', {
+      name,
+      email,
+    })
+
+    toast.success('Perfil editado com sucesso!')
+
+    yield put(actions.editSuccess({ name, email }))
+  } catch (err) {
+    const errors = get(err, 'response.data.errors', [])
+    const status = get(err, 'response.status', 0)
+
+    if (status === 401) {
+      toast.error('Você precisa fazer login novamente.')
+      yield put(actions.loginFailure())
+      return history.push('/login')
+    }
+
+    if (errors.length > 0) {
+      errors.map((error) => toast.error(error))
+    } else {
+      toast.error('Algo deu errado!')
+    }
+
+    return yield put(actions.editFailure())
+  }
+}
+
 export default all([
   takeLatest(types.LOGIN_REQUEST, loginRequest),
   takeLatest(types.PERSIST_REHYDRATE, persistRehydrate),
+  takeLatest(types.EDIT_REQUEST, editRequest),
 ])
