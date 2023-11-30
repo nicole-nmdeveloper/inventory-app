@@ -9,6 +9,7 @@ import { Container, Form } from './styled'
 import * as actions from '../../store/modules/auth/actions'
 
 import Loading from '../../components/Loading'
+import Delete from '../../components/Delete'
 
 export default function Edit() {
   const dispatch = useDispatch()
@@ -17,6 +18,7 @@ export default function Edit() {
   const nameStored = useSelector((state) => state.auth.user.name)
   const emailStored = useSelector((state) => state.auth.user.email)
   const isLoading = useSelector((state) => state.auth.isLoading)
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
 
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -78,6 +80,8 @@ export default function Edit() {
         <Link to="#">
           <span>Alterar senha</span>
         </Link>
+
+        {isLoggedIn && <Delete />}
       </Form>
     </Container>
   )
