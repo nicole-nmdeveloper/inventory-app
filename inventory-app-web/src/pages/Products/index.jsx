@@ -5,7 +5,7 @@ import { Image, Pencil, Trash2Icon, AlertCircle } from 'lucide-react'
 import { toast } from 'react-hot-toast'
 
 import { Container } from '../../styles/GlobalStyles'
-import { Table, ProfilePicture } from './styled'
+import { Table, ProfilePicture, NewProduct } from './styled'
 
 import axios from '../../services/axios'
 
@@ -74,6 +74,8 @@ export default function Products() {
       <Loading isLoading={isLoading} />
 
       <h1>Produtos</h1>
+
+      <NewProduct to="/product/">Novo produto</NewProduct>
 
       <Table>
         {products.map((product, index) => (

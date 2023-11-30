@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 import * as colors from '../../config/colors'
 
@@ -39,5 +40,21 @@ export const ProfilePicture = styled.div`
 
     border: 2px solid ${colors.darkColor};
     border-radius: 5px;
+  }
+`
+
+export const NewProduct = styled(Link)`
+  display: block;
+
+  padding-top: 20px;
+
+  color: ${colors.primaryColor};
+
+  &:hover {
+    color: ${colors.primaryDarkColor};
+  }
+
+  &:active {
+    color: ${colors.primaryLightColor};
   }
 `
