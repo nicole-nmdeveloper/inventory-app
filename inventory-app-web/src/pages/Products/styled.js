@@ -3,55 +3,143 @@ import { Link } from 'react-router-dom'
 
 import * as colors from '../../config/colors'
 
-export const Table = styled.div`
-  margin-top: 20px;
+export const ProductsContainer = styled.main`
+  background: ${colors.lightColor};
 
-  div {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 5px 0;
-  }
+  padding: 50px;
 
-  div + div {
-    border-top: 1px solid ${colors.primaryLightColor};
-  }
-
-  a {
+  h1 {
     color: ${colors.primaryColor};
 
-    &:hover {
-      color: ${colors.primaryDarkColor};
-    }
+    text-align: center;
 
-    &:active {
-      color: ${colors.primaryLightColor};
-    }
+    margin-bottom: 35px;
+  }
+
+  .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: center;
   }
 `
 
-export const ProfilePicture = styled.div`
-  width: 35px;
-  height: 45px;
+export const CardContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  @media screen and (min-width: 580px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: center;
+  }
+
+  @media screen and (min-width: 1024px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    justify-items: center;
+  }
+`
+
+export const Card = styled.div`
+  outline: 2px solid ${colors.primaryColor};
+  border-radius: 5px;
+
+  width: 100%;
+
+  @media screen and (min-width: 580px) {
+    width: 35vw;
+  }
+
+  @media screen and (min-width: 1024px) {
+    width: 22vw;
+  }
+`
+
+export const MainPicture = styled.div`
+  width: 100%;
+  height: 250px;
+  display: flex;
+
+  background-image: radial-gradient(
+    circle farthest-corner at 10% 20%,
+    ${colors.primaryLighterColor} 0%,
+    ${colors.primaryLightColor} 100.2%
+  );
+
+  color: ${colors.primaryDarkerColor};
+
+  border-bottom: 2px solid ${colors.primaryColor};
 
   img {
     width: 100%;
     height: 100%;
 
-    border: 2px solid ${colors.darkColor};
-    border-radius: 5px;
+    object-fit: cover;
   }
 `
 
-export const NewProduct = styled(Link)`
-  display: block;
+export const Description = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 15px;
 
-  padding-top: 20px;
+  padding: 10px;
+`
+
+export const Actions = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  gap: 10px;
 
   color: ${colors.primaryColor};
 
+  a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+  }
+`
+
+export const Divider = styled.div`
+  width: 100%;
+  height: 40px;
+`
+
+export const NoProductsTitle = styled.h2`
+  border-top: 1px solid ${colors.primaryLightColor};
+
+  color: ${colors.primaryColor};
+
+  margin-bottom: 50px;
+  padding: 20px 0 5px 0;
+`
+
+export const NewProduct = styled(Link)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+
+  border: 2px dashed ${colors.primaryDarkerColor};
+  border-radius: 4px;
+
+  padding: 15px;
+
+  color: ${colors.primaryDarkerColor};
+
+  font-weight: 500;
+
   &:hover {
-    color: ${colors.primaryDarkColor};
+    background: ${colors.primaryLighterColor};
   }
 
   &:active {

@@ -16,3 +16,17 @@ export const DeleteLink = styled(Link)`
     color: ${colors.primaryLighterColor};
   }
 `
+
+export const DeleteLinkConfirm = styled(Link)`
+  margin-top: 10px;
+
+  color: ${colors.dangerColor};
+
+  &:hover {
+    color: ${colors.dangerLightColor};
+  }
+
+  &:active {
+    color: ${colors.dangerDarkColor};
+  }
+`

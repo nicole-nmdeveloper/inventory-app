@@ -7,7 +7,8 @@ import { Link } from 'react-router-dom'
 import { Pencil } from 'lucide-react'
 import PropTypes from 'prop-types'
 
-import { Container, Form, ProductPicture, IconContainer } from './styled'
+import { PrivateForm, Label, Input, Button } from '../../styles/GlobalStyles'
+import { FormContainer, ProductPicture, IconContainer } from './styled'
 
 import axios from '../../services/axios'
 import history from '../../services/history'
@@ -130,10 +131,10 @@ export default function Product({ match }) {
   }
 
   return (
-    <Container>
+    <FormContainer>
       <Loading isLoading={isLoading} />
 
-      <Form onSubmit={handleSubmit}>
+      <PrivateForm onSubmit={handleSubmit}>
         <h1>{id ? 'Editar produto' : 'Novo produto'}</h1>
 
         {id && (
@@ -150,49 +151,49 @@ export default function Product({ match }) {
           </ProductPicture>
         )}
 
-        <label htmlFor="title">
+        <Label htmlFor="title">
           Título
-          <input
+          <Input
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             placeholder="Título do produto"
           />
-        </label>
+        </Label>
 
-        <label htmlFor="price">
+        <Label htmlFor="price">
           Preço
-          <input
+          <Input
             type="text"
             value={price}
             onChange={(e) => setPrice(e.target.value)}
             placeholder="Preço do produto"
           />
-        </label>
+        </Label>
 
-        <label htmlFor="amount">
+        <Label htmlFor="amount">
           Quantidade
-          <input
+          <Input
             type="number"
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
             placeholder="Quantidade disponível"
           />
-        </label>
+        </Label>
 
-        <label htmlFor="variants">
+        <Label htmlFor="variants">
           Variações
-          <input
+          <Input
             type="text"
             value={variants}
             onChange={(e) => setVariants(e.target.value)}
             placeholder="Defina as variações do produto"
           />
-        </label>
+        </Label>
 
-        <button type="submit">Salvar</button>
-      </Form>
-    </Container>
+        <Button type="submit">Salvar</Button>
+      </PrivateForm>
+    </FormContainer>
   )
 }
 

@@ -1,9 +1,17 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { toast } from 'react-hot-toast'
 import { isEmail } from 'validator'
 import { get } from 'lodash'
+import { useSelector } from 'react-redux'
 
-import { Container, Form } from './styled'
+import {
+  GlobalFormContainer,
+  OpenForm,
+  GlobalLink,
+  Label,
+  Input,
+  Button,
+} from '../../styles/GlobalStyles'
 
 import axios from '../../services/axios'
 import history from '../../services/history'
@@ -16,6 +24,8 @@ export default function Register() {
   const [password, setPassword] = useState('')
 
   const [isLoading, setIsLoading] = useState(false)
+
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
 
   async function handleSubmit(e) {
     e.preventDefault()
@@ -62,42 +72,57 @@ export default function Register() {
     }
   }
 
+  useEffect(() => {
+    if (isLoggedIn) {
+      return history.push('/products')
+    }
+  }, [isLoggedIn])
+
   return (
-    <Container>
+    <GlobalFormContainer>
       <Loading isLoading={isLoading} />
 
-      <Form onSubmit={handleSubmit}>
-        <h1>Crie sua conta</h1>
-        <label htmlFor="name">
+      <section>
+        <h1>
+          Crie sua conta na plataforma e organize seu estoque de maneira eficaz
+        </h1>
+      </section>
+
+      <OpenForm onSubmit={handleSubmit}>
+        <Label htmlFor="name">
           Nome
-          <input
+          <Input
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Digite seu nome"
           />
-        </label>
-        <label htmlFor="email">
+        </Label>
+        <Label htmlFor="email">
           E-mail
-          <input
+          <Input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Digite seu e-mail"
           />
-        </label>
-        <label htmlFor="password">
+        </Label>
+        <Label htmlFor="password">
           Senha
-          <input
+          <Input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Crie uma senha"
           />
-        </label>
+        </Label>
 
-        <button type="submit">Salvar</button>
-      </Form>
-    </Container>
+        <Button type="submit">Salvar</Button>
+
+        <span>
+          Já tem uma conta? Faça <GlobalLink to="/login">login</GlobalLink>
+        </span>
+      </OpenForm>
+    </GlobalFormContainer>
   )
 }

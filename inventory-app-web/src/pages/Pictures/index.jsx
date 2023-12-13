@@ -4,7 +4,7 @@ import { toast } from 'react-hot-toast'
 import { useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import { Container, Form } from './styled'
+import { FormContainer, Form } from './styled'
 
 import axios from '../../services/axios'
 import history from '../../services/history'
@@ -79,7 +79,7 @@ export default function Pictures({ match }) {
   }
 
   return (
-    <Container>
+    <FormContainer>
       <Loading isLoading={isLoading} />
 
       <Form>
@@ -95,7 +95,7 @@ export default function Pictures({ match }) {
           <input type="file" id="picture" onChange={handleChange} />
         </label>
       </Form>
-    </Container>
+    </FormContainer>
   )
 }
 

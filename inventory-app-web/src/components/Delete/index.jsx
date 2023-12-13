@@ -3,7 +3,7 @@ import { toast } from 'react-hot-toast'
 import { useDispatch, useSelector } from 'react-redux'
 import { get } from 'lodash'
 
-import { DeleteLink } from './styled'
+import { DeleteLink, DeleteLinkConfirm } from './styled'
 
 import Loading from '../Loading'
 
@@ -19,8 +19,17 @@ export default function Delete() {
 
   const [isLoading, setIsLoading] = useState(false)
 
-  async function handleDelete(e) {
+  function handleDeleteAsk(e) {
     e.preventDefault()
+
+    const confirmText = e.currentTarget.nextSibling
+    confirmText.setAttribute('style', 'display', 'block')
+
+    e.currentTarget.remove()
+  }
+
+  async function handleDelete(e) {
+    e.persist()
 
     try {
       setIsLoading(true)
@@ -51,9 +60,18 @@ export default function Delete() {
     <>
       <Loading isLoading={isLoading} />
       {id && (
-        <DeleteLink to="/users" onClick={handleDelete}>
-          Excluir conta
-        </DeleteLink>
+        <>
+          <DeleteLink to="/users" onClick={handleDeleteAsk}>
+            Excluir conta
+          </DeleteLink>
+          <DeleteLinkConfirm
+            to="/users"
+            style={{ display: 'none' }}
+            onClick={handleDelete}
+          >
+            Deseja mesmo excluir sua conta?
+          </DeleteLinkConfirm>
+        </>
       )}
     </>
   )

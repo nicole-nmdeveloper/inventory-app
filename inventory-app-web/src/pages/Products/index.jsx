@@ -1,11 +1,21 @@
 import React, { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import { get } from 'lodash'
-import { Image, Pencil, Trash2Icon, AlertCircle } from 'lucide-react'
+import { Image, Trash2Icon, PlusCircle } from 'lucide-react'
 import { toast } from 'react-hot-toast'
 
-import { Container } from '../../styles/GlobalStyles'
-import { Table, ProfilePicture, NewProduct } from './styled'
+import { GlobalLink } from '../../styles/GlobalStyles'
+import {
+  ProductsContainer,
+  CardContainer,
+  Card,
+  MainPicture,
+  Description,
+  Actions,
+  Divider,
+  NewProduct,
+  NoProductsTitle,
+} from './styled'
+import { dangerColor } from '../../config/colors'
 
 import axios from '../../services/axios'
 
@@ -35,8 +45,8 @@ export default function Products() {
   function handleDeleteAsk(e) {
     e.preventDefault()
 
-    const exclamation = e.currentTarget.nextSibling
-    exclamation.setAttribute('display', 'block')
+    const trashIcon = e.currentTarget.nextSibling
+    trashIcon.setAttribute('display', 'block')
 
     e.currentTarget.remove()
   }
@@ -70,53 +80,88 @@ export default function Products() {
   }
 
   return (
-    <Container>
+    <ProductsContainer>
       <Loading isLoading={isLoading} />
 
       <h1>Produtos</h1>
-
-      <NewProduct to="/product/">Novo produto</NewProduct>
-
-      <Table>
-        {products.map((product, index) => (
-          <div key={String(product.id)}>
-            <ProfilePicture>
-              {get(product, 'Pictures[0].url', false) ? (
-                <img
-                  crossOrigin=""
-                  src={product.Pictures[0].url}
-                  alt="Product"
-                />
-              ) : (
-                <Image size={48} strokeWidth={1} alt="Product" />
-              )}
-            </ProfilePicture>
-            <span>{product.title}</span>
-            <span>{product.price}</span>
-            <span>{product.amount}</span>
-            <span>{product.variants}</span>
-
-            <Link to={`/product/${product.id}/edit`}>
-              <Pencil size={16} />
-            </Link>
-
-            <Link
-              onClick={handleDeleteAsk}
-              to={`/product/${product.id}/delete`}
-            >
-              <Trash2Icon size={16} />
-            </Link>
-
-            <AlertCircle
-              size={16}
-              display="none"
-              cursor="pointer"
-              color="#B22222"
-              onClick={(e) => handleDelete(e, product.id, index)}
-            />
+      {products.length ? (
+        <>
+          <div className="container">
+            <NewProduct to="/product/">
+              Novo produto <PlusCircle size={26} />
+            </NewProduct>
           </div>
-        ))}
-      </Table>
-    </Container>
+
+          <Divider />
+
+          <CardContainer>
+            {products.map((product, index) => (
+              <div key={String(product.id)}>
+                <Card>
+                  <MainPicture>
+                    {get(product, 'Pictures[0].url', false) ? (
+                      <img
+                        crossOrigin=""
+                        src={product.Pictures[0].url}
+                        alt="Product"
+                      />
+                    ) : (
+                      <Image size={48} strokeWidth={1} alt="Product" />
+                    )}
+                  </MainPicture>
+
+                  <Description>
+                    <span>
+                      <b>Nome:</b> {product.title}
+                    </span>
+                    <span>
+                      <b>Preço:</b> {product.price}
+                    </span>
+                    <span>
+                      <b>Quantidade:</b> {product.amount}
+                    </span>
+                    <span>
+                      <b>Variações:</b> {product.variants}
+                    </span>
+
+                    <Actions>
+                      <GlobalLink to={`/product/${product.id}/edit`}>
+                        <span>Editar</span>
+                      </GlobalLink>
+
+                      <span>|</span>
+
+                      <GlobalLink
+                        onClick={handleDeleteAsk}
+                        to={`/product/${product.id}/delete`}
+                      >
+                        <span>Excluir</span>
+                      </GlobalLink>
+
+                      <Trash2Icon
+                        size={16}
+                        display="none"
+                        cursor="pointer"
+                        color={dangerColor}
+                        onClick={(e) => handleDelete(e, product.id, index)}
+                      />
+                    </Actions>
+                  </Description>
+                </Card>
+
+                <Divider />
+              </div>
+            ))}
+          </CardContainer>
+        </>
+      ) : (
+        <div className="container">
+          <NoProductsTitle>Cadastre seu primeiro produto</NoProductsTitle>
+          <NewProduct to="/product/">
+            Novo produto <PlusCircle size={26} />
+          </NewProduct>
+        </div>
+      )}
+    </ProductsContainer>
   )
 }

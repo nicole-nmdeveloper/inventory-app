@@ -1,8 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
+import { Store, User2, List, LogOut } from 'lucide-react'
 
-import { Nav, Divider } from './styled'
+import { NavContainer, Nav, DashboardNav } from './styled'
 
 import * as actions from '../../store/modules/auth/actions'
 
@@ -23,38 +24,52 @@ export default function Header() {
   }
 
   return (
-    <Nav>
-      <Link to="/">
-        <span>Home</span>
-      </Link>
-
+    <NavContainer>
       {isLoggedIn ? (
-        <>
-          <Divider>|</Divider>
-
-          <Link onClick={handleLogout} to="/logout">
-            <span>Sign out</span>
+        <DashboardNav>
+          <Link to="/products">
+            <span className="greetings">Olá, {userName}!</span>
           </Link>
 
-          <Divider>|</Divider>
+          <div>
+            <Link to="/products">
+              <List />
+              <span className="iconLabel">Produtos</span>
+            </Link>
 
-          <span>Welcome, {userName}</span>
-        </>
+            <Link to="/edit">
+              <User2 />
+              <span className="iconLabel">Perfil</span>
+            </Link>
+
+            <Link onClick={handleLogout} to="/logout">
+              <LogOut />
+              <span className="iconLabel">Sair</span>
+            </Link>
+          </div>
+        </DashboardNav>
       ) : (
-        <>
-          <Divider>|</Divider>
-
-          <Link to="/register">
-            <span>Sign up</span>
+        <Nav>
+          <Link to="/">
+            <Store />
+            <span>Inventory App</span>
           </Link>
 
-          <Divider>|</Divider>
+          <div>
+            <Link to="/">
+              <span>Início</span>
+            </Link>
 
-          <Link to="/login">
-            <span>Sign in</span>
-          </Link>
-        </>
+            <Link to="/register">
+              <span>Criar conta</span>
+            </Link>
+
+            <Link to="/login">
+              <span>Entrar</span>
+            </Link>
+          </div>
+        </Nav>
       )}
-    </Nav>
+    </NavContainer>
   )
 }

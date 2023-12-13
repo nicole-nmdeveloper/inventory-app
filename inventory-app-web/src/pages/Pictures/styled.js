@@ -2,19 +2,37 @@ import styled from 'styled-components'
 
 import * as colors from '../../config/colors'
 
+export const FormContainer = styled.main`
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+
+  text-align: center;
+
+  background: ${colors.primaryLighterColor};
+
+  @media screen and (min-width: 1024px) {
+    justify-content: center;
+    align-items: center;
+  }
+`
+
 export const Form = styled.form`
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  justify-content: center;
+  align-items: center;
 
-  height: 100%;
+  gap: 10px;
 
   background: ${colors.lightColor};
 
-  padding: 65px;
+  padding: 10% 5%;
 
   h1 {
-    margin-bottom: 15px;
+    color: ${colors.primaryColor};
+    padding-bottom: 30px;
   }
 
   label {
@@ -56,13 +74,14 @@ export const Form = styled.form`
     width: 180px;
     height: 180px;
   }
-`
 
-export const Container = styled.main`
-  display: grid;
-  place-items: center;
+  @media screen and (max-width: 280px) {
+    h1 {
+      font-size: 26px;
+    }
+  }
 
-  text-align: center;
-
-  background: ${colors.primaryLighterColor};
+  @media screen and (min-width: 1024px) {
+    width: 50%;
+  }
 `

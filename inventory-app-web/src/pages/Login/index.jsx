@@ -1,14 +1,23 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { toast } from 'react-hot-toast'
 import { isEmail } from 'validator'
 import { useDispatch, useSelector } from 'react-redux'
 import { get } from 'lodash'
 
-import { Container, Form } from './styled'
+import {
+  GlobalFormContainer,
+  OpenForm,
+  GlobalLink,
+  Label,
+  Input,
+  Button,
+} from '../../styles/GlobalStyles'
 
 import * as actions from '../../store/modules/auth/actions'
 
 import Loading from '../../components/Loading'
+
+import history from '../../services/history'
 
 export default function Login(props) {
   const dispatch = useDispatch()
@@ -16,6 +25,7 @@ export default function Login(props) {
   const prevPath = get(props, 'location.state.prevPath', '/products')
 
   const isLoading = useSelector((state) => state.auth.isLoading)
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn)
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -32,7 +42,7 @@ export default function Login(props) {
 
     if (password.length < 6 || password.length > 50) {
       formErrors = true
-      toast.error('Senha inválida')
+      toast.error('Senha inválida.')
     }
 
     if (formErrors) return
@@ -40,34 +50,45 @@ export default function Login(props) {
     dispatch(actions.loginRequest({ email, password, prevPath }))
   }
 
+  useEffect(() => {
+    if (isLoggedIn) {
+      return history.push('/products')
+    }
+  }, [isLoggedIn])
+
   return (
-    <Container>
+    <GlobalFormContainer>
       <Loading isLoading={isLoading} />
 
-      <Form onSubmit={handleSubmit}>
-        <h1>Login</h1>
+      <section>
+        <h1>Faça login na plataforma e acesse sua dashboard</h1>
+      </section>
 
-        <label htmlFor="email">
+      <OpenForm onSubmit={handleSubmit}>
+        <Label htmlFor="email">
           E-mail
-          <input
+          <Input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Digite seu e-mail"
           />
-        </label>
-        <label htmlFor="password">
+        </Label>
+        <Label htmlFor="password">
           Senha
-          <input
+          <Input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Digite sua senha"
           />
-        </label>
+        </Label>
 
-        <button type="submit">Entrar</button>
-      </Form>
-    </Container>
+        <Button type="submit">Entrar</Button>
+
+        <span>Ainda não tem uma conta?</span>
+        <GlobalLink to="/register">Registre-se</GlobalLink>
+      </OpenForm>
+    </GlobalFormContainer>
   )
 }

@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react'
 import { toast } from 'react-hot-toast'
 import { isEmail } from 'validator'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
 
-import { Container, Form } from './styled'
+import { PrivateForm, Label, Input, Button } from '../../styles/GlobalStyles'
+import { FormContainer } from './styled'
 
 import * as actions from '../../store/modules/auth/actions'
 
@@ -51,38 +51,38 @@ export default function Edit() {
   }
 
   return (
-    <Container>
+    <FormContainer>
       <Loading isLoading={isLoading} />
 
-      <Form onSubmit={handleSubmit}>
+      <PrivateForm onSubmit={handleSubmit}>
         <h1>Edite seu perfil</h1>
-        <label htmlFor="name">
+        <Label htmlFor="name">
           Nome
-          <input
+          <Input
             type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Digite seu nome"
           />
-        </label>
-        <label htmlFor="email">
+        </Label>
+        <Label htmlFor="email">
           E-mail
-          <input
+          <Input
             type="email"
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Digite seu e-mail"
           />
-        </label>
+        </Label>
 
-        <button type="submit">Salvar alterações</button>
+        <Button type="submit">Salvar alterações</Button>
 
-        <Link to="#">
+        {/* <Link to="#">
           <span>Alterar senha</span>
-        </Link>
+        </Link> */}
 
         {isLoggedIn && <Delete />}
-      </Form>
-    </Container>
+      </PrivateForm>
+    </FormContainer>
   )
 }
