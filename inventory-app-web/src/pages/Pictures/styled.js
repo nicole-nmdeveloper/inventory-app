@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 import * as colors from '../../config/colors'
 
-export const FormContainer = styled.main`
+export const Container = styled.main`
   width: 100%;
 
   display: flex;
@@ -83,5 +83,38 @@ export const Form = styled.form`
 
   @media screen and (min-width: 1024px) {
     width: 50%;
+
+    padding: 5%;
+  }
+`
+
+export const Gallery = styled.div`
+  border-radius: 5px;
+
+  padding: 40px;
+
+  width: 90%;
+
+  display: grid;
+  place-items: center;
+  align-items: center;
+  justify-content: space-evenly;
+  gap: 10px;
+
+  img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    border-radius: 5px;
+  }
+
+  @media screen and (min-width: 470px) {
+    width: 80%;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
   }
 `

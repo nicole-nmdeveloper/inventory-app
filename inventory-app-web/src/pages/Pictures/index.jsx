@@ -4,7 +4,7 @@ import { toast } from 'react-hot-toast'
 import { useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import { FormContainer, Form } from './styled'
+import { Container, Form, Gallery } from './styled'
 
 import axios from '../../services/axios'
 import history from '../../services/history'
@@ -19,6 +19,7 @@ export default function Pictures({ match }) {
   const id = get(match, 'params.id', '')
 
   const [picture, setPicture] = useState('')
+  const [gallery, setGallery] = useState([])
 
   const [isLoading, setIsLoading] = useState(false)
 
@@ -30,6 +31,8 @@ export default function Pictures({ match }) {
         const { data } = await axios.get(`/products/${id}`)
 
         setPicture(get(data, 'Pictures[0].url', ''))
+
+        setGallery(get(data, 'Pictures', ''))
 
         setIsLoading(false)
       } catch (err) {
@@ -79,7 +82,7 @@ export default function Pictures({ match }) {
   }
 
   return (
-    <FormContainer>
+    <Container>
       <Loading isLoading={isLoading} />
 
       <Form>
@@ -94,8 +97,20 @@ export default function Pictures({ match }) {
 
           <input type="file" id="picture" onChange={handleChange} />
         </label>
+
+        <Gallery>
+          {gallery.map((image, index) => (
+            <div key={String(index)}>
+              {!image.url ? (
+                <span>Nada a exibir</span>
+              ) : (
+                <img crossOrigin="" src={image.url} alt="Product" />
+              )}
+            </div>
+          ))}
+        </Gallery>
       </Form>
-    </FormContainer>
+    </Container>
   )
 }
 
