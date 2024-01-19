@@ -18,6 +18,12 @@ As páginas são responsivas e foi colocado um pequeno atraso na API para o comp
 
 
 
+## 🎬 Video
+
+https://github.com/nicole-nmdeveloper/inventory-app/assets/102914172/e6ca3be2-369a-4993-996e-40607bd88830
+
+
+
 ## ✨ Principais Tecnologias 
 
 **Front-end:** React, Vite, Redux, Redux Saga, Styled-Components, Axios
